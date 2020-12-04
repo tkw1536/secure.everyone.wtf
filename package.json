@@ -9,6 +9,8 @@
     "deploy": "yarn build && push-dir --dir=out --branch=gh-pages"
   },
   "dependencies": {
+    "@types/muicss": "^0.9.2",
+    "muicss": "^0.10.2",
     "next": "10.0.3",
     "push-dir": "^0.4.1",
     "react": "17.0.1",
