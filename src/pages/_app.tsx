@@ -1,3 +1,4 @@
-import "muicss/dist/css/mui.min.css";
+import 'fontsource-roboto';
+
 import App from "next/app";
 export default App;
