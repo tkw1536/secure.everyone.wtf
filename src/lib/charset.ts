@@ -4,6 +4,7 @@ export enum CharClass {
   UpperCaseLetters = "Capitals",
   Numbers = "Numbers",
   Symbols = "Symbols",
+  Whitespace = "Spaces & Tabs",
 }
 
 /** a list of all classes */
@@ -15,6 +16,7 @@ export const ClassChars: Readonly<Record<CharClass, string>> = Object.freeze({
   [CharClass.UpperCaseLetters]: "ABCDEFGHIKLMNOPQRSTUVXYZ",
   [CharClass.Numbers]: "0123456789",
   [CharClass.Symbols]: "!\"$%^'()*+,-./:;<=>?@[\\]^_`",
+  [CharClass.Whitespace]: " \t",
 });
 
 /** a charset is a list of included CharClasses */
@@ -27,7 +29,8 @@ export function NewCharset(): CharSet {
   ) as CharSet;
 
   charset[CharClass.Symbols] = false;
-  
+  charset[CharClass.Whitespace] = false;
+
   return charset;
 }
 
