@@ -1,7 +1,16 @@
 import * as React from 'react';
 import Head from 'next/head';
+import { ReactChild } from "react";
 
-export default class Page extends React.Component<{title: string, url: string, description: string, image?: string}> {
+type PageProps = {
+    title: string,
+    url: string,
+    description: string,
+    image?: string,
+    children?: React.ReactElement | React.ReactElement[],
+}
+
+export default class Page extends React.Component<PageProps> {
     render() {
         const { title, url, description, image, children } = this.props;
         return <>
@@ -12,7 +21,7 @@ export default class Page extends React.Component<{title: string, url: string, d
                 <meta property="twitter:url" content={url} />
 
                 <title>{title}</title>
-                
+
                 <meta itemProp="name" content={title} />
                 <meta name="og:title" content={title} />
                 <meta property="twitter:title" content={title} />
@@ -34,7 +43,7 @@ export default class Page extends React.Component<{title: string, url: string, d
 
                 <meta name="og:type" content="website" />
             </Head>
-            { children }
+            {children}
         </>;
     }
 }
