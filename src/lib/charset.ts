@@ -34,7 +34,7 @@ export function NewCharset(): CharSet {
   return charset;
 }
 
-/** given a charset, return the list of contained characters */
+/** CharsetToString turns a charset into a string */
 export function CharsetToString(charset: CharSet): string {
   return Object.entries(charset)
     .filter(([_, included]) => included)

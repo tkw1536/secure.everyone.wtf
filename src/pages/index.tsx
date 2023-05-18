@@ -30,6 +30,9 @@ interface StateOutput {
 interface StateInput {
   numChars: number,
   charset: CharSet,
+
+  customEnabled: boolean;
+  custom: string,
 }
 
 type State = StateInput & StateOutput;
@@ -45,13 +48,20 @@ export default class Home extends React.Component<Props, State> {
   state: State = {
     numChars: this.props.defaultNumChar,
     charset: NewCharset(),
+    customEnabled: false,
+    custom: "",
   }
 
 
   generatePassword = () => {
-    const { numChars, charset } = this.state;
+    const { numChars, charset, customEnabled, custom } = this.state;
 
-    const generator = new PasswordGenerator(CharsetToString(charset));
+    const groups = CharsetToString(charset);
+    const customs = customEnabled ? custom : "";
+
+    const chars = new Set((groups + customs).split(""));
+
+    const generator = new PasswordGenerator(Array.from(chars).join(""));
     const password = generator.generate(numChars);
 
     this.setState({ password })
@@ -83,8 +93,16 @@ export default class Home extends React.Component<Props, State> {
     })
   }
 
+  toggleCustom = (event: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ customEnabled: event.target.checked })
+  }
+  updateCustom = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const custom = event.target.value
+    this.setState({ customEnabled: custom != "", custom })
+  }
+
   render() {
-    const { password, numChars, charset } = this.state;
+    const { password, numChars, charset, custom, customEnabled } = this.state;
     const { numPresets } = this.props;
     return (
       <Container maxWidth="md">
@@ -94,7 +112,7 @@ export default class Home extends React.Component<Props, State> {
           <Card>
             <CardHeader title="Password Generator" subheader="Use this page to quickly generate a random password. All data is generated locally and never leaves your device. " />
             <CardContent>
-              
+
               <Grid container direction="row" spacing={1}>
                 <Grid container spacing={1}>
                   <Grid item sm={10}>
@@ -109,7 +127,7 @@ export default class Home extends React.Component<Props, State> {
                     }
                   </Grid>
                 </Grid>
-                
+
                 <Grid container spacing={1}>
                   <Grid item sm={6}>
                     <FormLabel component="legend">Password Length</FormLabel>
@@ -133,6 +151,19 @@ export default class Home extends React.Component<Props, State> {
                           control={<Switch checked={charset[c]} onChange={this.setCharClass.bind(this, c)} />}
                         />
                       </React.Fragment>)}
+                      <>
+                        <Grid container>
+                          <Grid item lg={3}>
+                            <FormControlLabel
+                              label={<>Custom{" "}</>}
+                              control={<Switch checked={customEnabled} onChange={this.toggleCustom} />}
+                            />
+                          </Grid>
+                          <Grid item lg={8}>
+                            <TextField fullWidth type="text" value={custom || ""} onChange={this.updateCustom} autoComplete="off" />
+                          </Grid>
+                        </Grid>
+                      </>
                     </FormGroup>
                   </Grid>
                 </Grid>
@@ -140,8 +171,8 @@ export default class Home extends React.Component<Props, State> {
 
               <CardActions>
                 <Fab variant="extended" onClick={this.generatePassword}>
-                      Generate Password
-                  </Fab>
+                  Generate Password
+                </Fab>
               </CardActions>
             </CardContent>
           </Card>
