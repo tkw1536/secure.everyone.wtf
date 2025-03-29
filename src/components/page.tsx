@@ -1,13 +1,12 @@
 import * as React from 'react';
 import Head from 'next/head';
-import { ReactChild } from "react";
 
 type PageProps = {
     title: string,
     url: string,
     description: string,
     image?: string,
-    children?: React.ReactElement | React.ReactElement[],
+    children?: React.ReactNode, 
 }
 
 export default class Page extends React.Component<PageProps> {

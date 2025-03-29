@@ -1,27 +1,26 @@
 import * as React from "react"
 import { CopyToClipboard } from 'react-copy-to-clipboard'
-import { GetStaticProps } from "next";
+import type { GetStaticProps } from "next";
 
 import Page from "../components/page";
-
 
 import { AllClasses, CharClass, CharSet, CharsetToString, ClassChars, NewCharset } from "../lib/charset";
 import { PasswordGenerator } from "../lib/generator";
 
-import Button from "@material-ui/core/Button";
-import ButtonGroup from "@material-ui/core/ButtonGroup";
-import Container from "@material-ui/core/Container";
-import Fab from "@material-ui/core/Fab";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormGroup from "@material-ui/core/FormGroup";
-import FormLabel from "@material-ui/core/FormLabel";
-import Grid from "@material-ui/core/Grid";
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import Switch from "@material-ui/core/Switch";
-import TextField from "@material-ui/core/TextField";
+import Button from "@mui/material/Button";
+import ButtonGroup from "@mui/material/ButtonGroup";
+import Container from "@mui/material/Container";
+import Fab from "@mui/material/Fab";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormGroup from "@mui/material/FormGroup";
+import FormLabel from "@mui/material/FormLabel";
+import Grid from "@mui/material/GridLegacy";
+import Card from '@mui/material/Card';
+import CardHeader from '@mui/material/CardHeader';
+import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
+import Switch from "@mui/material/Switch";
+import TextField from "@mui/material/TextField";
 
 interface StateOutput {
   password?: string;
@@ -135,7 +134,7 @@ export default class Home extends React.Component<Props, State> {
                       <Grid item sm={6}>
                         <TextField type="number" value={numChars} inputProps={{ min: "1" }} onChange={this.storeNumChars} autoComplete="off" />
                       </Grid>
-                      <Grid item sm={6}>
+                      <Grid item sm={6} style={{marginTop: 'auto', marginBottom: 'auto'}}>
                         <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group">
                           {numPresets.map(v => <Button onClick={this.loadNumCharsPreset.bind(this, v)} key={`prefix-${v}`}>{v}</Button>)}
                         </ButtonGroup>
@@ -153,9 +152,9 @@ export default class Home extends React.Component<Props, State> {
                       </React.Fragment>)}
                       <>
                         <Grid container>
-                          <Grid item lg={3}>
+                          <Grid item lg={3} style={{marginTop: 'auto', marginBottom: 'auto', marginRight: '1em'}}>
                             <FormControlLabel
-                              label={<>Custom{" "}</>}
+                              label="Custom"
                               control={<Switch checked={customEnabled} onChange={this.toggleCustom} />}
                             />
                           </Grid>
