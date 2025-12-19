@@ -1,5 +1,5 @@
 import * as React from "react"
-import { CopyToClipboard } from 'react-copy-to-clipboard'
+import { CopyToClipboard } from 'react-copy-to-clipboard-ts'
 
 import { AllClasses, CharClass, CharSet, CharsetToString, ClassChars, NewCharset } from "./lib/charset";
 import { PasswordGenerator } from "./lib/generator";
