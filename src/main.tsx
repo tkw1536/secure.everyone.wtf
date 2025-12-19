@@ -6,11 +6,11 @@ import App from './App'
 
 const cache = createCache({ key: 'css' })
 const root = document.getElementById('root')
-if (typeof root === 'undefined') {
+if (root === null) {
   throw new Error('Root element not found')
 }
 
-createRoot(document.getElementById('root')!).render(
+createRoot(root).render(
   <React.StrictMode>
     <CacheProvider value={cache}>
       <App defaultNumChar={64} numPresets={[50, 64, 128]} />
