@@ -1,48 +1,62 @@
 import * as React from 'react';
-import Head from 'next/head';
 
 type PageProps = {
     title: string,
     url: string,
     description: string,
     image?: string,
-    children?: React.ReactNode, 
+    children?: React.ReactNode,
 }
 
 export default class Page extends React.Component<PageProps> {
+    componentDidMount() {
+        this.updateHead();
+    }
+
+    componentDidUpdate() {
+        this.updateHead();
+    }
+
+    updateHead() {
+        const { title, url, description, image } = this.props;
+
+        document.title = title;
+
+        this.setMeta('og:url', url);
+        this.setMeta('twitter:url', url, 'property');
+
+        this.setMeta('name', title, 'itemprop');
+        this.setMeta('og:title', title);
+        this.setMeta('twitter:title', title, 'property');
+
+        this.setMeta('description', description);
+        this.setMeta('description', description, 'itemprop');
+        this.setMeta('og:description', description);
+        this.setMeta('og:site_name', description);
+        this.setMeta('twitter:description', description, 'property');
+
+        if (typeof image === 'string') {
+            this.setMeta('image', image);
+            this.setMeta('image', image, 'itemprop');
+            this.setMeta('og:image', image);
+            this.setMeta('twitter:image', image, 'property');
+            this.setMeta('twitter:card', 'summary_large_image', 'property');
+        }
+
+        this.setMeta('og:type', 'website');
+    }
+
+    setMeta(name: string, content: string, attr: 'name' | 'property' | 'itemprop' = 'name') {
+        let meta = document.querySelector(`meta[${attr}="${name}"]`) as HTMLMetaElement | null;
+        if (!meta) {
+            meta = document.createElement('meta');
+            meta.setAttribute(attr, name);
+            document.head.appendChild(meta);
+        }
+        meta.content = content;
+    }
+
     render() {
-        const { title, url, description, image, children } = this.props;
-        return <>
-            <Head>
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-                <meta name="og:url" content={url} />
-                <meta property="twitter:url" content={url} />
-
-                <title>{title}</title>
-
-                <meta itemProp="name" content={title} />
-                <meta name="og:title" content={title} />
-                <meta property="twitter:title" content={title} />
-
-                <meta name="description" content={description} />
-                <meta itemProp="description" content={description} />
-                <meta name="og:description" content={description} />
-                <meta name="og:site_name" content={description} />
-                <meta property="twitter:description" content={description} />
-
-                {(typeof image === "string") && <>
-                    <meta name="image" content={image} />
-                    <meta itemProp="image" content={image} />
-                    <meta name="og:image" content={image} />
-                    <meta property="twitter:image" content={image} />
-
-                    <meta property="twitter:card" content="summary_large_image" />
-                </>}
-
-                <meta name="og:type" content="website" />
-            </Head>
-            {children}
-        </>;
+        return <>{this.props.children}</>;
     }
 }

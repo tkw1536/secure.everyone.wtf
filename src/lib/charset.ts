@@ -38,6 +38,6 @@ export function NewCharset(): CharSet {
 export function CharsetToString(charset: CharSet): string {
   return Object.entries(charset)
     .filter(([_, included]) => included)
-    .map(([clz, _]) => ClassChars[clz])
+    .map(([clz, _]) => ClassChars[clz as CharClass])
     .join("");
 }

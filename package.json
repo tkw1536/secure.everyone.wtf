@@ -2,20 +2,18 @@
   "name": "secure.everyone.wtf",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "deploy": "yarn build && gh-pages --dist out --no-history --dotfiles"
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "deploy": "yarn build && gh-pages --dist dist --no-history --dotfiles"
   },
   "dependencies": {
     "@emotion/cache": "^11.14.0",
     "@emotion/react": "^11.14.0",
-    "@emotion/server": "^11.11.0",
     "@emotion/styled": "^11.14.0",
     "@mui/material": "^7.3.6",
-    "@mui/material-nextjs": "^7.3.6",
-    "next": "^16.1.0",
     "react": "^19.2.3",
     "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "^19.2.3"
@@ -23,8 +21,12 @@
   "devDependencies": {
     "@types/node": "^25.0.3",
     "@types/react": "^19.2.7",
+    "@types/react-copy-to-clipboard": "^5",
+    "@types/react-dom": "^19",
+    "@vitejs/plugin-react": "^4.5.2",
     "gh-pages": "^6.3.0",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vite": "^6.3.5"
   },
   "packageManager": "yarn@4.12.0"
 }
