@@ -1,8 +1,6 @@
 import * as React from "react"
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 
-import Page from "./components/page";
-
 import { AllClasses, CharClass, CharSet, CharsetToString, ClassChars, NewCharset } from "./lib/charset";
 import { PasswordGenerator } from "./lib/generator";
 
@@ -105,8 +103,6 @@ export default class App extends React.Component<Props, State> {
     return (
       <Container maxWidth="md">
         <form noValidate onSubmit={this.preventDefault} autoComplete="off">
-          <Page title="Password Generator" url="https://secure.everyone.wtf/" description="Generate a secure random password" />
-
           <Card>
             <CardHeader title="Password Generator" subheader="Use this page to quickly generate a random password. All data is generated locally and never leaves your device. " />
             <CardContent>
