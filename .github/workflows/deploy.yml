@@ -17,6 +17,9 @@ jobs:
           corepack enable
           corepack install
           yarn install --immutable
+      - name: Test using 'yarn test'
+        run: |
+          yarn test
       - name: Deploy using 'yarn deploy'
         run: |
           git config --local user.email "${{ github.actor }}@users.noreply.github.com"
