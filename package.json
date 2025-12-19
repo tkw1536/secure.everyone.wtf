@@ -7,12 +7,13 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "deploy": "yarn build && gh-pages --dist dist --no-history --dotfiles"
+    "deploy": "yarn build && gh-pages --dist dist --no-history --dotfiles",
+    "test": "vitest"
   },
   "dependencies": {
     "@emotion/cache": "^11.14.0",
     "@emotion/react": "^11.14.0",
-    "@emotion/styled": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
     "@mui/material": "^7.3.6",
     "react": "^19.2.3",
     "react-copy-to-clipboard-ts": "^1.3.0",
@@ -21,11 +22,13 @@
   "devDependencies": {
     "@types/node": "^25.0.3",
     "@types/react": "^19.2.7",
-    "@types/react-dom": "^19",
-    "@vitejs/plugin-react": "^4.5.2",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.2",
     "gh-pages": "^6.3.0",
+    "happy-dom": "^20.0.11",
     "typescript": "^5.9.3",
-    "vite": "^6.3.5"
+    "vite": "^7.3.0",
+    "vitest": "^4.0.16"
   },
   "packageManager": "yarn@4.12.0"
 }
